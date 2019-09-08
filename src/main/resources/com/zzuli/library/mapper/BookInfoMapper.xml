@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzuli.library.mapper.BookInfoMapper">
+    <!--查询所有图书-->
+    <select id="listAllBooks" resultType="bookInfo">
+        select * from book_info
+    </select>
+
+    <!--按检索查询图书-->
+    <select id="listBooksBySearchWords" parameterType="string" resultType="bookInfo">
+        select * from book_info where name like #{search} or author like #{search} or introduction like #{search}
+    </select>
+
+    <!--按book_id查询图书-->
+    <select id="getBookById" parameterType="long" resultType="bookInfo">
+        select * from book_info where book_id = #{book_id}
+    </select>
+
+    <!--按book_id删除图书-->
+    <delete id="deleteBookById" parameterType="long">
+        delete from book_info where book_id = #{book_id}
+    </delete>
+
+    <!--修改指定id的图书-->
+    <update id="updateBookInfo" parameterType="bookInfo">
+        update book_info set
+        name = #{name},
+        author = #{author},
+        publish = #{publish},
+        ISBN = #{ISBN},
+        introduction = #{introduction},
+        language = #{language},
+        price = #{price},
+        pub_date = #{pub_date},
+        class_id = #{class_id},
+        number = #{number}
+        where book_id = #{book_id}
+    </update>
+
+    <!--新增图书信息-->
+    <insert id="insertBookInfo" parameterType="bookInfo">
+        insert into book_info values (default, #{name}, #{author}, #{publish}, #{ISBN}, #{introduction},
+          #{language}, #{price}, #{pub_date}, #{class_id}, #{number}
+        )
+    </insert>
+
+    <!--更新图书数量number 借书or还书-->
+    <update id="updateBookNumber" parameterType="bookInfo">
+        update book_info set number = #{number} where book_id = #{book_id}
+    </update>
+
+</mapper>

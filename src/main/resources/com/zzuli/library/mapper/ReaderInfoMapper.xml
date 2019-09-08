@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzuli.library.mapper.ReaderInfoMapper">
+    <!--查询指定id的读者-->
+    <select id="getReaderInfoById" parameterType="readerInfo" resultType="readerInfo">
+        select * from reader_info where reader_id = #{reader_id}
+    </select>
+
+    <!--查询全部读者信息-->
+    <select id="listAllReaderInfo" resultType="readerInfo">
+        select * from reader_info
+    </select>
+
+    <!--查询读者的读者证号 reader_id-->
+    <select id="getReaderId" parameterType="readerInfo" resultType="long">
+        select reader_id from reader_info where
+        name = #{name} and
+        gender = #{gender} and
+        birthday = #{birthday} and
+        address = #{address} and
+        phone = #{phone}
+    </select>
+
+    <!--修改指定id的读者信息-->
+    <update id="updateReaderInfo" parameterType="readerInfo">
+        update reader_info set
+        name = #{name},
+        gender = #{gender},
+        birthday = #{birthday},
+        address = #{address},
+        phone = #{phone}
+        where reader_id = #{reader_id}
+    </update>
+
+    <!--删除指定id的读者信息-->
+    <delete id="deleteReaderInfo" parameterType="long">
+        delete from reader_info where reader_id = #{reader_id}
+    </delete>
+
+    <!--新增读者信息-->
+    <insert id="insertReaderInfo" parameterType="readerInfo">
+        insert into reader_info values (default, #{name}, #{gender}, #{birthday}, #{address}, #{phone})
+    </insert>
+
+</mapper>
