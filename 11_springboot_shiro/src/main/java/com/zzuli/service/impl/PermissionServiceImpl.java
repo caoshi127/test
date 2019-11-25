@@ -24,6 +24,8 @@ public class PermissionServiceImpl implements PermissionService {
 			perimssions.add(permission.getPercode());
 		}
 
+		System.out.println("helloWorld");
+
 		System.out.println("Hrlloo");
 		return perimssions;
 	}
